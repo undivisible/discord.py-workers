@@ -3,12 +3,16 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "discord.py"
-description = "A Python wrapper for the Discord API"
+name = "discord.py-workers"
+description = "A discord.py fork with Cloudflare Workers interaction support"
 readme = { file = "README.rst", content-type = "text/x-rst" }
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
 authors = [{ name = "Rapptz" }]
+dependencies = [
+    "aiohttp>=3.7.4,<4; sys_platform != 'emscripten'",
+    "audioop-lts; python_version >= '3.13' and sys_platform != 'emscripten'",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: MIT License",
@@ -26,14 +30,11 @@ classifiers = [
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
-dynamic = ["version", "dependencies"]
+dynamic = ["version"]
 
 [project.urls]
-Documentation = "https://discordpy.readthedocs.io/en/latest/"
-"Issue tracker" = "https://github.com/Rapptz/discord.py/issues"
-
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
+Documentation = "https://github.com/undivisible/discord.py-workers/tree/master/docs"
+"Issue tracker" = "https://github.com/undivisible/discord.py-workers/issues"
 
 [project.optional-dependencies]
 voice = [
@@ -86,6 +87,7 @@ packages = [
     "discord.app_commands",
     "discord.ext.commands",
     "discord.ext.tasks",
+    "discord_workers",
 ]
 include-package-data = true
 

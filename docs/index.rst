@@ -26,6 +26,7 @@ Getting started
 Is this your first time using the library? This is the place to get started!
 
 - **First steps:** :doc:`intro` | :doc:`quickstart` | :doc:`logging`
+- **Cloudflare Workers:** :doc:`workers` (HTTP application-command interactions; no Gateway client)
 - **Working with Discord:** :doc:`discord` | :doc:`intents`
 - **Examples:** Many examples are available in the :resource:`repository <examples>`.
 
@@ -59,6 +60,7 @@ These pages go into great detail about everything the API can do.
 .. toctree::
   :maxdepth: 1
 
+  workers
   api
   interactions/api
   discord.ext.commands API Reference <ext/commands/api.rst>

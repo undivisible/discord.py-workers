@@ -1,17 +1,19 @@
-discord.py
-==========
+discord.py-workers
+==================
 
 .. image:: https://discord.com/api/guilds/336642139381301249/embed.png
    :target: https://discord.gg/r3sSKJJ
    :alt: Discord server invite
-.. image:: https://img.shields.io/pypi/v/discord.py.svg
-   :target: https://pypi.python.org/pypi/discord.py
-   :alt: PyPI version info
-.. image:: https://img.shields.io/pypi/pyversions/discord.py.svg
-   :target: https://pypi.python.org/pypi/discord.py
-   :alt: PyPI supported Python versions
 
-A modern, easy to use, feature-rich, and async ready API wrapper for Discord written in Python.
+This is a fork of `discord.py <https://github.com/Rapptz/discord.py>`__ with an additional,
+standalone ``discord_workers`` package for handling Discord application interactions on
+`Cloudflare Workers <https://developers.cloudflare.com/workers/languages/python/>`__.
+
+The original ``discord`` package remains the upstream Gateway client and is intended for
+regular Python runtimes. It is **not** what runs inside a Worker. ``discord_workers`` handles
+HTTP application-command interactions and deliberately does not import ``discord.py`` or
+``aiohttp``. It does not provide a persistent Gateway connection, voice, or a general Discord
+REST client. See the `Workers guide <docs/workers.rst>`__ for its runtime and API limits.
 
 Key Features
 -------------
@@ -23,43 +25,20 @@ Key Features
 Installing
 ----------
 
-**Python 3.8 or higher is required**
+**Python 3.8 or higher is required for the upstream ``discord`` package.** A
+`virtual environment <https://docs.python.org/3/library/venv.html>`__ is recommended.
 
-To install the library without full voice support, you can just run the following command:
-
-.. note::
-
-    A `Virtual Environment <https://docs.python.org/3/library/venv.html>`__ is recommended to install
-    the library, especially on Linux where the system Python is externally managed and restricts which
-    packages you can install on it.
-
+To install this fork from source on a regular Python runtime:
 
 .. code:: sh
 
-    # Linux/macOS
-    python3 -m pip install -U discord.py
+    git clone https://github.com/undivisible/discord.py-workers.git
+    cd discord.py-workers
+    python -m pip install .
 
-    # Windows
-    py -3 -m pip install -U discord.py
-
-Otherwise to get voice support you should run the following command:
-
-.. code:: sh
-
-    # Linux/macOS
-    python3 -m pip install -U "discord.py[voice]"
-
-    # Windows
-    py -3 -m pip install -U discord.py[voice]
-
-
-To install the development version, do the following:
-
-.. code:: sh
-
-    $ git clone https://github.com/Rapptz/discord.py
-    $ cd discord.py
-    $ python3 -m pip install -U .[voice]
+For the upstream client's optional voice dependencies, run ``python -m pip install ".[voice]"``.
+Cloudflare Workers use the ``discord_workers`` package and Cloudflare's Python runtime; follow
+the `Workers guide <docs/workers.rst>`__ rather than importing the Gateway client there.
 
 
 Optional Packages
@@ -120,5 +99,7 @@ Links
 ------
 
 - `Documentation <https://discordpy.readthedocs.io/en/latest/index.html>`_
+- `Cloudflare Workers guide <docs/workers.rst>`__
+- `This fork on GitHub <https://github.com/undivisible/discord.py-workers>`__
 - `Official Discord Server <https://discord.gg/r3sSKJJ>`_
 - `Discord API <https://discord.gg/discord-api>`_
